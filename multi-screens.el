@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-01 19:11:49 stardiviner>
+;;; Time-stamp: <2020-07-01 19:34:31 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -35,7 +35,8 @@
   :group 'multi-screens)
 
 (defcustom multi-screens-keybinding-prefix (kbd "C-M-]")
-  "Specify multi-screens-mode keybindings prefix before loading."
+  "Specify multi-screens-mode keybindings prefix before loading.
+If it is nil, the default keybindings will not be defined. User can define by yourself."
   :type 'kbd
   :group 'multi-screens)
 
@@ -73,8 +74,9 @@ This is helpful for multiple monitor screens."
   :keymap multi-screens-mode-map
   (if multi-screens-mode
       (progn
-        (define-key multi-screens-mode-map
-          multi-screens-keybinding-prefix multi-screens-prefix-map)
+        (when multi-screens-keybinding-prefix
+          (define-key multi-screens-mode-map
+            multi-screens-keybinding-prefix multi-screens-prefix-map))
         (message "multi-screens-mode enabled."))
     (message "multi-screens-mode disabled.")))
 
