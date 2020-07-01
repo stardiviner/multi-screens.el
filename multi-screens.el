@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-01 11:25:07 stardiviner>
+;;; Time-stamp: <2020-07-01 19:11:49 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -55,14 +55,14 @@ This is helpful for multiple monitor screens."
   (call-interactively 'scroll-down-command)
   (other-frame -1))
 
-(defvar multi-screens-mode-map
+(defvar multi-screens-prefix-map
   (let ((map (make-sparse-keymap)))
-    (global-set-key multi-screens-keybinding-prefix map)
-    (when map
-      (define-key map (kbd "]") 'multi-screens-scroll-other-frame)
-      (define-key map (kbd "[") 'multi-screens-scroll-other-frame-down))
-    map)
-  "Multi-screens-mode map.")
+    (define-key map (kbd "]") 'multi-screens-scroll-other-frame)
+    (define-key map (kbd "[") 'multi-screens-scroll-other-frame-down)
+    map))
+
+(defvar multi-screens-mode-map
+  (make-sparse-keymap))
 
 ;;;###autoload
 (define-minor-mode multi-screens-mode
@@ -70,10 +70,12 @@ This is helpful for multiple monitor screens."
   :require "multi-screens"
   :global t
   :group 'multi-screens
-  :init-value nil
   :keymap multi-screens-mode-map
   (if multi-screens-mode
-      (message "multi-screens-mode enabled.")
+      (progn
+        (define-key multi-screens-mode-map
+          multi-screens-keybinding-prefix multi-screens-prefix-map)
+        (message "multi-screens-mode enabled."))
     (message "multi-screens-mode disabled.")))
 
 
