@@ -1,0 +1,30 @@
+* Intro
+
+An Emacs minor mode contains helper utilities for multiple screens.
+
+** Motivation
+
+For example, like my workspace, I have multiple screens, I usually need to
+switch Emacs frame to scroll PDF documents, source code files, and web browser
+pages etc. So I created a minor mode which contains some helper utilities to
+help user controlling this.
+
+[[IMG_20200606_174420.jpg]]
+
+[[IMG_20200606_172445.jpg]]
+
+* Features
+
+- scroll other window in other frame like =[C-M-V]=
+
+* Installation
+
+Not on MELPA yet.
+
+** use-package + Quelpa
+
+#+begin_src emacs-lisp
+(use-package mutli-screens
+  :quelpa (multi-screens :fetcher github :repo "stardiviner/multi-screens.el")
+  :hook (after-init . multi-screens-mode))
+#+end_src
