@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-02 15:38:37 stardiviner>
+;;; Time-stamp: <2020-07-02 15:48:33 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -75,7 +75,9 @@ This is helpful for multiple monitor screens."
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "]") 'multi-screens-scroll-other-frame)
     (define-key map (kbd "[") 'multi-screens-scroll-other-frame-down)
-    (define-key map (kbd "5") 'multi-screens-window-to-new-frame)
+    (define-key map (kbd "5") 'make-frame-command)
+    (define-key map (kbd "o") 'display-buffer-other-frame)
+    (define-key map (kbd "f") 'find-file-other-frame)
     map))
 
 (defvar multi-screens-mode-map
