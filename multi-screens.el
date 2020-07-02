@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-02 15:12:14 stardiviner>
+;;; Time-stamp: <2020-07-02 15:38:37 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -63,6 +63,13 @@ This is helpful for multiple monitor screens."
     (unless (one-window-p)
       (delete-window))
     (display-buffer-pop-up-frame buffer nil)))
+
+(defun multi-screens--select-frame ()
+  "Select FRAME-NAME interactively."
+  (interactive)
+  (let ((frame-name (completing-read "multi-screens select frame: "
+                                     (mapcar #'car (make-frame-names-alist)))))
+    (select-frame (cdr (assoc frame-name (make-frame-names-alist))))))
 
 (defvar multi-screens-prefix-map
   (let ((map (make-sparse-keymap)))
