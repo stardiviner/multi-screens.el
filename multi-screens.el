@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-02 15:48:33 stardiviner>
+;;; Time-stamp: <2020-07-02 15:51:34 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -45,7 +45,9 @@ If it is nil, the default keybindings will not be defined. User can define by yo
 This is helpful for multiple monitor screens."
   (interactive)
   (other-frame +1)
-  (call-interactively 'scroll-up-command)
+  (if (derived-mode-p 'eaf-mode)
+      (eaf-proxy-scroll_up_page)
+    (call-interactively 'scroll-up-command))
   (other-frame -1))
 
 (defun multi-screens-scroll-other-frame-down ()
@@ -53,7 +55,9 @@ This is helpful for multiple monitor screens."
 This is helpful for multiple monitor screens."
   (interactive)
   (other-frame +1)
-  (call-interactively 'scroll-down-command)
+  (if (derived-mode-p 'eaf-mode)
+      (eaf-proxy-scroll_down_page)
+    (call-interactively 'scroll-down-command))
   (other-frame -1))
 
 (defun multi-screens-window-to-new-frame ()
