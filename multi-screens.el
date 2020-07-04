@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-02 15:51:34 stardiviner>
+;;; Time-stamp: <2020-07-04 16:36:16 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -68,6 +68,13 @@ This is helpful for multiple monitor screens."
       (delete-window))
     (display-buffer-pop-up-frame buffer nil)))
 
+(defun multi-screens-maximum-other-frame ()
+  "Maximum other frame."
+  (interactive)
+  (other-frame +1)
+  (toggle-frame-maximized)
+  (other-frame -1))
+
 (defun multi-screens--select-frame ()
   "Select FRAME-NAME interactively."
   (interactive)
@@ -79,6 +86,7 @@ This is helpful for multiple monitor screens."
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "]") 'multi-screens-scroll-other-frame)
     (define-key map (kbd "[") 'multi-screens-scroll-other-frame-down)
+    (define-key map (kbd "m") 'multi-screens-maximum-other-frame)
     (define-key map (kbd "5") 'make-frame-command)
     (define-key map (kbd "o") 'display-buffer-other-frame)
     (define-key map (kbd "f") 'find-file-other-frame)
