@@ -1,6 +1,6 @@
 ;;; multi-screens.el --- Minor mode to controlling frames for multiple screens -*- lexical-binding: t; -*-
 
-;;; Time-stamp: <2020-07-04 19:17:59 stardiviner>
+;;; Time-stamp: <2020-07-23 16:20:19 stardiviner>
 
 ;; Authors: stardiviner <numbchild@gmail.com>
 ;; Package-Requires: ((emacs "25"))
@@ -40,6 +40,10 @@ If it is nil, the default keybindings will not be defined. User can define by yo
   :type 'kbd
   :group 'multi-screens)
 
+(defun multi-screens-multiple-screens-p ()
+  "Detect whether has multiple screens."
+  (> (length (display-monitor-attributes-list)) 1))
+
 (defun multi-screens-scroll-other-frame ()
   "Scroll other frame.
 This is helpful for multiple monitor screens."
@@ -63,17 +67,19 @@ This is helpful for multiple monitor screens."
 (defun multi-screens-window-to-new-frame ()
   "Popup current window into a new frame."
   (interactive)
-  (make-frame-command)
-  (other-frame +1)
-  (toggle-frame-fullscreen)
-  (other-frame -1))
+  (when (multi-screens-multiple-screens-p)
+    (make-frame-command)
+    (other-frame +1)
+    (toggle-frame-fullscreen)
+    (other-frame -1)))
 
 (defun multi-screens-maximum-other-frame ()
   "Maximum other frame."
   (interactive)
-  (other-frame +1)
-  (toggle-frame-fullscreen)
-  (other-frame -1))
+  (when (multi-screens-multiple-screens-p)
+    (other-frame +1)
+    (toggle-frame-fullscreen)
+    (other-frame -1)))
 
 (defun multi-screens--select-frame ()
   "Select FRAME-NAME interactively."
@@ -102,7 +108,8 @@ This is helpful for multiple monitor screens."
   :global t
   :group 'multi-screens
   :keymap multi-screens-mode-map
-  (if multi-screens-mode
+  (if (and (multi-screens-multiple-screens-p)
+           multi-screens-mode)
       (progn
         (when multi-screens-keybinding-prefix
           (define-key multi-screens-mode-map
