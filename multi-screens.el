@@ -114,7 +114,11 @@ This is helpful for multiple monitor screens."
         (when multi-screens-keybinding-prefix
           (define-key multi-screens-mode-map
             multi-screens-keybinding-prefix multi-screens-prefix-map))
+        (global-set-key (kbd "C-M-]") 'multi-screens-scroll-other-frame-up)
+        (global-set-key (kbd "C-M-[") 'multi-screens-scroll-other-frame-down)
         (message "multi-screens-mode enabled."))
+    (global-unset-key (kbd "C-M-]"))
+    (global-unset-key (kbd "C-M-["))
     (message "multi-screens-mode disabled.")))
 
 
