@@ -44,7 +44,7 @@ If it is nil, the default keybindings will not be defined. User can define by yo
   "Detect whether has multiple screens."
   (> (length (display-monitor-attributes-list)) 1))
 
-(defun multi-screens-scroll-other-frame ()
+(defun multi-screens-scroll-other-frame-up ()
   "Scroll other frame.
 This is helpful for multiple monitor screens."
   (interactive)
@@ -90,7 +90,7 @@ This is helpful for multiple monitor screens."
 
 (defvar multi-screens-prefix-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "]") 'multi-screens-scroll-other-frame)
+    (define-key map (kbd "]") 'multi-screens-scroll-other-frame-up)
     (define-key map (kbd "[") 'multi-screens-scroll-other-frame-down)
     (define-key map (kbd "m") 'multi-screens-maximum-other-frame)
     (define-key map (kbd "5") 'multi-screens-window-to-new-frame)
