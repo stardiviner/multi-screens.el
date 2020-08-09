@@ -34,7 +34,7 @@
   :prefix "multi-screens-"
   :group 'multi-screens)
 
-(defcustom multi-screens-keybinding-prefix (kbd "C-M-]")
+(defcustom multi-screens-keybinding-prefix (kbd "C-M-5")
   "Specify multi-screens-mode keybindings prefix before loading.
 If it is nil, the default keybindings will not be defined. User can define by yourself."
   :type 'kbd
