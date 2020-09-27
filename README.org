@@ -16,6 +16,17 @@ help user controlling this.
 * Features
 
 - scroll other window in other frame like =[C-M-V]=
+- open buffer/window in new frame in other screen.
+
+* Usage
+
+** auto display new frame in other screen
+
+Setup KDE/Plasma KWin rules like this:
+
+[[file:screenshots/new-frame-in-other-screen.png]]
+
+When you press =[C-M-] 5]= (~multi-screens-window-to-new-frame~), it will auto display new frame in other screen.
 
 * Installation
 

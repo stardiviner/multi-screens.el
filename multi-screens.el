@@ -68,7 +68,9 @@ This is helpful for multiple monitor screens."
   "Popup current window into a new frame."
   (interactive)
   (when (multi-screens-multiple-screens-p)
-    (make-frame-command)
+    ;; add special frame name string for Window Manager matching rules.
+    (make-frame '((name . "Emacs multi-screens")))
+    (delete-window)
     (other-frame +1)
     (toggle-frame-fullscreen)
     (other-frame -1)))
